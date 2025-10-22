@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>For Mahek 💖</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #fff0f5;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1 {
+            color: #ff1493;
+            z-index: 2;
+        }
+        button {
+            margin: 10px;
+            padding: 15px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 2;
+        }
+        .yes {
+            background-color: #ff69b4;
+            color: white;
+        }
+        .yes:hover {
+            background-color: #ff1493;
+        }
+        .no {
+            background-color: #aaa;
+            color: white;
+        }
+        .no:hover {
+            background-color: #555;
+        }
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float 5s linear infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0); opacity: 1; }
+            100% { transform: translateY(-50px) translateX(50px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="question">Mahek, can I tell you a secret? 🤫</h1>
+    <button class="yes" onclick="nextQuestion('yes')">Yes</button>
+    <button class="no" onclick="nextQuestion('no')">No</button>
+
+    <!-- Background Music -->
+    <audio autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        let step = 0;
+
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * 30 + 10 + 'px';
+            heart.innerText = '❤️';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        setInterval(createHeart, 500);
+
+        function nextQuestion(answer) {
+            const q = document.getElementById("question");
+
+            if(answer === 'no') {
+                alert("It's okay, I like you too ❤️");
+                return;
+            }
+
+            step++;
+
+            if(step === 1) {
+                q.innerText = "Yay! 😄 Here's a funny one: Do you think I can make you smile every day?";
+            } else if(step === 2) {
+                q.innerText = "Would you go on a silly adventure with me sometime? 🛶";
+            } else if(step === 3) {
+                q.innerText = "Final question: Can I keep sending you cute messages like this? 💌";
+            } else {
+                alert("Thank you, Mahek! You're awesome ❤️");
+                q.innerText = "Hope you had fun! 😊";
+                document.querySelectorAll("button").forEach(btn => btn.style.display = "none");
+            }
+        }
+    </script>
+
+</body>
+</html>
